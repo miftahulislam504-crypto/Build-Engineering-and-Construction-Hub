@@ -59,7 +59,7 @@ img { max-width: 100%; height: auto; display: block; }
 
   /* ── Cards ── */
   .card       { @apply bg-white rounded-2xl shadow-card border border-dark-100; }
-  .card-hover { @apply card hover:shadow-card-hover transition-shadow duration-200 cursor-pointer; }
+  .card-hover { @apply bg-white rounded-2xl shadow-card border border-dark-100 hover:shadow-card-hover transition-shadow duration-200 cursor-pointer; }
 
   /* ── Inputs ── */
   .input {
@@ -94,7 +94,11 @@ img { max-width: 100%; height: auto; display: block; }
   .skeleton { @apply bg-dark-200 animate-skeleton rounded-lg; }
 
   /* ── Product card ── */
-  .product-card { @apply card-hover overflow-hidden group; }
+  .product-card {
+    @apply bg-white rounded-2xl shadow-card border border-dark-100
+           hover:shadow-card-hover transition-shadow duration-200
+           cursor-pointer overflow-hidden group;
+  }
   .product-card-img {
     @apply relative overflow-hidden bg-dark-50 aspect-square;
   }

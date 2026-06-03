@@ -11,21 +11,17 @@ export default function CartSidebar() {
 
   return (
     <>
-      {/* Overlay */}
       {isOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-50 animate-fade-in"
           onClick={closeCart}
         />
       )}
-
-      {/* Sidebar */}
       <div
         className={`fixed right-0 top-0 bottom-0 w-full sm:w-96 bg-white z-50
                     shadow-2xl flex flex-col transition-transform duration-300
                     ${isOpen ? "translate-x-0" : "translate-x-full"}`}
       >
-        {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-dark-100">
           <div className="flex items-center gap-2">
             <ShoppingCart size={20} className="text-primary-600" />
@@ -43,16 +39,12 @@ export default function CartSidebar() {
           </button>
         </div>
 
-        {/* Items */}
         <div className="flex-1 overflow-y-auto py-4 px-5 space-y-4">
           {items.length === 0 ? (
-            <div className="flex flex-col items-center justify-center h-full
-                            text-center py-16">
+            <div className="flex flex-col items-center justify-center h-full text-center py-16">
               <ShoppingCart size={52} className="text-dark-200 mb-4" />
               <p className="font-medium text-dark-500 mb-1">Cart is empty</p>
-              <p className="text-sm text-dark-400 mb-6">
-                Add products to get started
-              </p>
+              <p className="text-sm text-dark-400 mb-6">Add products to get started</p>
               <button onClick={closeCart} className="btn-primary btn-sm">
                 Continue Shopping
               </button>
@@ -61,10 +53,8 @@ export default function CartSidebar() {
             items.map((item) => (
               <div
                 key={`${item.productId}-${item.variantName}`}
-                className="flex gap-3 p-3 rounded-xl border border-dark-100
-                           hover:border-dark-200 transition-colors"
+                className="flex gap-3 p-3 rounded-xl border border-dark-100 hover:border-dark-200 transition-colors"
               >
-                {/* Image */}
                 <div className="w-16 h-16 rounded-lg overflow-hidden bg-dark-50 flex-shrink-0">
                   <img
                     src={item.image || "/images/placeholder.png"}
@@ -72,45 +62,27 @@ export default function CartSidebar() {
                     className="w-full h-full object-cover"
                   />
                 </div>
-
-                {/* Info */}
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-dark-800 line-clamp-1">
-                    {item.name}
-                  </p>
+                  <p className="text-sm font-medium text-dark-800 line-clamp-1">{item.name}</p>
                   {item.variantName && (
                     <p className="text-xs text-dark-400 mt-0.5">{item.variantName}</p>
                   )}
                   <p className="text-sm font-bold text-primary-600 mt-1">
                     {formatPrice(item.price)}
-                    <span className="text-xs font-normal text-dark-400">
-                      /{item.unit}
-                    </span>
+                    <span className="text-xs font-normal text-dark-400">/{item.unit}</span>
                   </p>
-
-                  {/* Qty controls */}
                   <div className="flex items-center justify-between mt-2">
                     <div className="flex items-center gap-2">
                       <button
-                        onClick={() =>
-                          updateQty(item.productId, item.quantity - 1, item.variantName)
-                        }
-                        className="w-6 h-6 rounded-lg border border-dark-200
-                                   flex items-center justify-center hover:bg-dark-50
-                                   transition-colors"
+                        onClick={() => updateQty(item.productId, item.quantity - 1, item.variantName)}
+                        className="w-6 h-6 rounded-lg border border-dark-200 flex items-center justify-center hover:bg-dark-50 transition-colors"
                       >
                         <Minus size={12} />
                       </button>
-                      <span className="text-sm font-medium w-6 text-center">
-                        {item.quantity}
-                      </span>
+                      <span className="text-sm font-medium w-6 text-center">{item.quantity}</span>
                       <button
-                        onClick={() =>
-                          updateQty(item.productId, item.quantity + 1, item.variantName)
-                        }
-                        className="w-6 h-6 rounded-lg border border-dark-200
-                                   flex items-center justify-center hover:bg-dark-50
-                                   transition-colors"
+                        onClick={() => updateQty(item.productId, item.quantity + 1, item.variantName)}
+                        className="w-6 h-6 rounded-lg border border-dark-200 flex items-center justify-center hover:bg-dark-50 transition-colors"
                       >
                         <Plus size={12} />
                       </button>
@@ -128,31 +100,17 @@ export default function CartSidebar() {
           )}
         </div>
 
-        {/* Footer */}
         {items.length > 0 && (
           <div className="border-t border-dark-100 p-5 space-y-4">
             <div className="flex items-center justify-between">
               <span className="text-dark-500 text-sm">Subtotal</span>
-              <span className="font-bold text-dark-900 text-lg">
-                {formatPrice(totalPrice())}
-              </span>
+              <span className="font-bold text-dark-900 text-lg">{formatPrice(totalPrice())}</span>
             </div>
-            <p className="text-xs text-dark-400 text-center">
-              Delivery charge calculated at checkout
-            </p>
-            <Link
-              href="/checkout"
-              onClick={closeCart}
-              className="btn-primary w-full justify-center btn-lg"
-            >
-              Proceed to Checkout
-              <ArrowRight size={18} />
+            <p className="text-xs text-dark-400 text-center">Delivery charge calculated at checkout</p>
+            <Link href="/checkout" onClick={closeCart} className="btn-primary w-full justify-center btn-lg">
+              Proceed to Checkout <ArrowRight size={18} />
             </Link>
-            <Link
-              href="/cart"
-              onClick={closeCart}
-              className="btn-secondary w-full justify-center"
-            >
+            <Link href="/cart" onClick={closeCart} className="btn-secondary w-full justify-center">
               View Full Cart
             </Link>
           </div>
