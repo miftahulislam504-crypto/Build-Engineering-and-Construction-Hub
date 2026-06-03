@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import {
   Package, Wrench, HardHat, Zap, Droplets,
-  Layers, DoorOpen, BrickWall, Mountain, Shield,
+  Layers, DoorOpen, Brick, Mountain, Shield,
   PenTool, Building, BookOpen, MapPin, ChevronRight,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
