@@ -35,48 +35,40 @@ img { max-width: 100%; height: auto; display: block; }
 
   /* ── Buttons ── */
   .btn {
-    @apply inline-flex items-center justify-center gap-2 font-medium
-           rounded-xl transition-all duration-200 focus:outline-none
-           focus:ring-2 focus:ring-offset-2
-           disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply inline-flex items-center justify-center gap-2 font-medium rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
   }
   .btn-primary {
-    @apply btn bg-primary-600 hover:bg-primary-700 text-white
-           focus:ring-primary-500 px-5 py-2.5 text-sm;
+    @apply inline-flex items-center justify-center gap-2 font-medium rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed bg-primary-600 hover:bg-primary-700 text-white focus:ring-primary-500 px-5 py-2.5 text-sm;
   }
   .btn-secondary {
-    @apply btn bg-white hover:bg-dark-50 text-dark-800
-           border border-dark-200 focus:ring-dark-300 px-5 py-2.5 text-sm;
+    @apply inline-flex items-center justify-center gap-2 font-medium rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed bg-white hover:bg-dark-50 text-dark-800 border border-dark-200 focus:ring-dark-300 px-5 py-2.5 text-sm;
   }
   .btn-accent {
-    @apply btn bg-accent-500 hover:bg-accent-600 text-white
-           focus:ring-orange-400 px-5 py-2.5 text-sm;
+    @apply inline-flex items-center justify-center gap-2 font-medium rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed bg-accent-500 hover:bg-accent-600 text-white focus:ring-orange-400 px-5 py-2.5 text-sm;
   }
-  .btn-ghost  { @apply btn hover:bg-dark-100 text-dark-600 px-4 py-2 text-sm; }
+  .btn-ghost  { @apply inline-flex items-center justify-center gap-2 font-medium rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-dark-100 text-dark-600 px-4 py-2 text-sm; }
   .btn-sm     { @apply px-3.5 py-1.5 text-xs; }
   .btn-lg     { @apply px-7 py-3.5 text-base; }
-  .btn-icon   { @apply p-2.5; }
+  .btn-icon   { @apply inline-flex items-center justify-center gap-2 font-medium rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed p-2.5; }
 
   /* ── Cards ── */
-  .card       { @apply bg-white rounded-2xl shadow-card border border-dark-100; }
-  .card-hover { @apply bg-white rounded-2xl shadow-card border border-dark-100 hover:shadow-card-hover transition-shadow duration-200 cursor-pointer; }
+  .card       { @apply bg-white rounded-2xl border border-dark-100; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .card-hover { @apply bg-white rounded-2xl border border-dark-100 transition-shadow duration-200 cursor-pointer; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .card-hover:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.10); }
 
   /* ── Inputs ── */
   .input {
-    @apply w-full px-4 py-2.5 rounded-xl border border-dark-200
-           text-dark-800 text-sm placeholder:text-dark-400
-           bg-white focus:outline-none focus:ring-2
-           focus:ring-primary-500 focus:border-transparent transition-all duration-200;
+    @apply w-full px-4 py-2.5 rounded-xl border border-dark-200 text-dark-800 text-sm placeholder:text-dark-400 bg-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200;
   }
   .label { @apply block text-sm font-medium text-dark-700 mb-1.5; }
 
   /* ── Badges ── */
   .badge        { @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium; }
-  .badge-blue   { @apply badge bg-primary-100 text-primary-700; }
-  .badge-green  { @apply badge bg-green-100 text-green-700; }
-  .badge-yellow { @apply badge bg-yellow-100 text-yellow-700; }
-  .badge-red    { @apply badge bg-red-100 text-red-700; }
-  .badge-gray   { @apply badge bg-dark-100 text-dark-600; }
+  .badge-blue   { @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700; }
+  .badge-green  { @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700; }
+  .badge-yellow { @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-700; }
+  .badge-red    { @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-700; }
+  .badge-gray   { @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-dark-100 text-dark-600; }
 
   /* ── Section title ── */
   .section-title {
@@ -95,9 +87,11 @@ img { max-width: 100%; height: auto; display: block; }
 
   /* ── Product card ── */
   .product-card {
-    @apply bg-white rounded-2xl shadow-card border border-dark-100
-           hover:shadow-card-hover transition-shadow duration-200
-           cursor-pointer overflow-hidden group;
+    @apply bg-white rounded-2xl border border-dark-100 transition-shadow duration-200 cursor-pointer overflow-hidden group;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .product-card:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.10);
   }
   .product-card-img {
     @apply relative overflow-hidden bg-dark-50 aspect-square;
