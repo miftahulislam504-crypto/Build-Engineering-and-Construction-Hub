@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Search } from "lucide-react";
 import { collection, query, where, orderBy, limit, getDocs } from "firebase/firestore";
@@ -9,7 +9,8 @@ import ProductCard from "@/components/product/ProductCard";
 import ProductCardSkeleton from "@/components/product/ProductCardSkeleton";
 import type { Product } from "@/lib/types";
 
-export default function SearchPage() {
+// ── Inner component that uses useSearchParams ──
+function SearchContent() {
   const searchParams = useSearchParams();
   const q = searchParams.get("q") || "";
 
@@ -81,5 +82,28 @@ export default function SearchPage() {
         </div>
       )}
     </div>
+  );
+}
+
+// ── Loading fallback ──
+function SearchLoading() {
+  return (
+    <div className="container-main py-8">
+      <div className="mb-6 h-10 bg-dark-100 rounded animate-pulse w-48" />
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        {Array.from({ length: 8 }).map((_, i) => (
+          <ProductCardSkeleton key={i} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ── Default export with Suspense boundary ──
+export default function SearchPage() {
+  return (
+    <Suspense fallback={<SearchLoading />}>
+      <SearchContent />
+    </Suspense>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { Suspense, useEffect, useState, useCallback } from "react";
 import { useSearchParams } from "next/navigation";
 import { SlidersHorizontal, X, ChevronDown, ChevronUp } from "lucide-react";
 import { collection, query, where, orderBy, limit, getDocs, QueryConstraint } from "firebase/firestore";
@@ -18,7 +18,8 @@ const SORT_OPTIONS = [
   { label: "Popularity",    value: "popularity" },
 ];
 
-export default function ProductsPage() {
+// ── Inner component that uses useSearchParams ──
+function ProductsContent() {
   const searchParams = useSearchParams();
   const filterParam  = searchParams.get("filter");
   const catParam     = searchParams.get("category");
@@ -252,6 +253,28 @@ export default function ProductsPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+// ── Loading fallback ──
+function ProductsLoading() {
+  return (
+    <div className="container-main py-8">
+      <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-4">
+        {Array.from({ length: 12 }).map((_, i) => (
+          <ProductCardSkeleton key={i} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ── Default export with Suspense boundary ──
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={<ProductsLoading />}>
+      <ProductsContent />
+    </Suspense>
   );
 }
 
