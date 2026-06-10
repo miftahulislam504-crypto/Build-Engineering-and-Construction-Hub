@@ -1,7 +1,27 @@
+// app/(main)/layout.tsx — এই file টা replace করো
+// LiveChat এবং CompareBar যোগ হয়েছে
+
+import dynamic from "next/dynamic";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import CartSidebar from "@/components/cart/CartSidebar";
-import WhatsAppButton from "@/components/ui/WhatsAppButton";
+
+// Lazy load করো — performance-এর জন্য
+const CartSidebar = dynamic(
+  () => import("@/components/cart/CartSidebar"),
+  { ssr: false }
+);
+const WhatsAppButton = dynamic(
+  () => import("@/components/ui/WhatsAppButton"),
+  { ssr: false }
+);
+const LiveChat = dynamic(
+  () => import("@/components/ui/LiveChat"),
+  { ssr: false }
+);
+const CompareBar = dynamic(
+  () => import("@/components/product/CompareBar"),
+  { ssr: false }
+);
 
 export default function MainLayout({
   children,
@@ -15,8 +35,12 @@ export default function MainLayout({
         {children}
       </main>
       <Footer />
+
+      {/* Floating components */}
       <CartSidebar />
       <WhatsAppButton />
+      <CompareBar />
+      <LiveChat />
     </div>
   );
 }

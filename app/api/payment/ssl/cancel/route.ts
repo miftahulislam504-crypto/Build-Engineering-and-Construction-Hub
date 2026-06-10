@@ -1,0 +1,7 @@
+// app/api/payment/ssl/cancel/route.ts
+import { NextRequest, NextResponse } from "next/server";
+
+export async function POST(req: NextRequest) {
+  const appURL = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+  return NextResponse.redirect(`${appURL}/checkout?payment=cancelled`);
+}
