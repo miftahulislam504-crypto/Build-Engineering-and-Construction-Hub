@@ -1,24 +1,16 @@
 "use client";
-// components/home/TrendingProducts.tsx
-import { useEffect, useState } from "react";
+
 import Link from "next/link";
 import { ArrowRight, TrendingUp } from "lucide-react";
-import { getProducts } from "@/lib/firestore";
+import { useTrendingProducts } from "@/hooks/useProducts";
 import ProductCard from "@/components/product/ProductCard";
 import ProductCardSkeleton from "@/components/product/ProductCardSkeleton";
 import type { Product } from "@/lib/types";
 
 export default function TrendingProducts() {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading,  setLoading]  = useState(true);
+  const { data: products, isLoading } = useTrendingProducts();
 
-  useEffect(() => {
-    getProducts({ isTrending: true, limitCount: 4 })
-      .then((d) => setProducts(d as Product[]))
-      .finally(() => setLoading(false));
-  }, []);
-
-  if (!loading && products.length === 0) return null;
+  if (!isLoading && (!products || products.length === 0)) return null;
 
   return (
     <section className="py-10 bg-white">
@@ -30,16 +22,18 @@ export default function TrendingProducts() {
             </div>
             <h2 className="section-title mb-0">Trending Now</h2>
           </div>
-          <Link href="/products?filter=trending"
+          <Link
+            href="/products?filter=trending"
             className="flex items-center gap-1.5 text-sm text-primary-600
-                       hover:text-primary-700 font-medium transition-colors">
+                       hover:text-primary-700 font-medium transition-colors"
+          >
             View All <ArrowRight size={15} />
           </Link>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-          {loading
+          {isLoading
             ? Array.from({ length: 4 }).map((_, i) => <ProductCardSkeleton key={i} />)
-            : products.map((p) => <ProductCard key={p.id} product={p} />)
+            : (products as Product[]).map((p) => <ProductCard key={p.id} product={p} />)
           }
         </div>
       </div>

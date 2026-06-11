@@ -1,38 +1,10 @@
 "use client";
-// components/home/BlogSection.tsx
-import { useEffect, useState } from "react";
+
 import Link from "next/link";
 import { ArrowRight, BookOpen } from "lucide-react";
-import { getBlogPosts } from "@/lib/firestore";
-import { formatDateShort } from "@/lib/utils";
+import { useLatestBlogPosts } from "@/hooks/useProducts";
+import { formatDateShort, cn } from "@/lib/utils";
 import type { BlogPost } from "@/lib/types";
-
-const FALLBACK: Partial<BlogPost>[] = [
-  {
-    id:        "1",
-    title:     "How to Choose the Right Grade of Cement for Your Project",
-    excerpt:   "Understanding cement grades and their applications is crucial for structural integrity.",
-    category:  "article",
-    thumbnail: "",
-    publishedAt: new Date("2024-05-01"),
-  },
-  {
-    id:        "2",
-    title:     "Steel Rod Price Update — June 2024",
-    excerpt:   "Latest BSRM and GPH Ispat steel rod prices in the Bangladesh market.",
-    category:  "news",
-    thumbnail: "",
-    publishedAt: new Date("2024-06-10"),
-  },
-  {
-    id:        "3",
-    title:     "Complete Guide to Waterproofing Your Roof",
-    excerpt:   "Step-by-step guide using Sika and Dr Fixit waterproofing products.",
-    category:  "blog",
-    thumbnail: "",
-    publishedAt: new Date("2024-06-12"),
-  },
-];
 
 const CAT_COLORS: Record<string, string> = {
   blog:    "badge-blue",
@@ -41,15 +13,9 @@ const CAT_COLORS: Record<string, string> = {
 };
 
 export default function BlogSection() {
-  const [posts,   setPosts]   = useState<Partial<BlogPost>[]>(FALLBACK);
-  const [loading, setLoading] = useState(true);
+  const { data: posts, isLoading } = useLatestBlogPosts();
 
-  useEffect(() => {
-    getBlogPosts()
-      .then((d) => { if (d.length > 0) setPosts(d as BlogPost[]); })
-      .catch(() => {})
-      .finally(() => setLoading(false));
-  }, []);
+  if (!isLoading && (!posts || posts.length === 0)) return null;
 
   return (
     <section className="py-10 bg-dark-50">
@@ -70,52 +36,73 @@ export default function BlogSection() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {posts.slice(0, 3).map((post) => (
-            <Link
-              key={post.id}
-              href={`/blog/${post.slug || post.id}`}
-              className="card-hover overflow-hidden group"
-            >
-              {/* Thumbnail */}
-              <div className="h-44 bg-gradient-to-br from-primary-100 to-primary-50
-                               overflow-hidden relative">
-                {post.thumbnail ? (
-                  <img
-                    src={post.thumbnail}
-                    alt={post.title}
-                    className="w-full h-full object-cover group-hover:scale-105
-                               transition-transform duration-300"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center">
-                    <BookOpen size={40} className="text-primary-200" />
-                  </div>
-                )}
-                <div className="absolute top-3 left-3">
-                  <span className={`badge text-xs ${CAT_COLORS[post.category || "blog"]}`}>
-                    {post.category?.toUpperCase()}
-                  </span>
+        {isLoading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <div key={i} className="card overflow-hidden">
+                <div className="skeleton h-44 w-full" />
+                <div className="p-5 space-y-2">
+                  <div className="skeleton h-4 w-3/4 rounded" />
+                  <div className="skeleton h-3 w-full rounded" />
                 </div>
               </div>
-
-              {/* Content */}
-              <div className="p-5">
-                <h3 className="font-display font-bold text-dark-800 mb-2
-                               line-clamp-2 text-sm leading-snug
-                               group-hover:text-primary-700 transition-colors">
-                  {post.title}
-                </h3>
-                <p className="text-xs text-dark-500 line-clamp-2 mb-3 leading-relaxed">
-                  {post.excerpt}
-                </p>
-                <p className="text-xs text-dark-400">
-                  {post.publishedAt && formatDateShort(post.publishedAt)}
-                </p>
-              </div>
-            </Link>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {(posts as BlogPost[]).slice(0, 3).map((post) => (
+              <Link
+                key={post.id}
+                href={`/blog/${post.slug}`}
+                className="card-hover overflow-hidden group"
+              >
+                <div className="h-44 bg-gradient-to-br from-primary-100 to-primary-50
+                                overflow-hidden relative">
+                  {post.thumbnail ? (
+                    <img
+                      src={post.thumbnail}
+                      alt={post.title}
+                      loading="lazy"
+                      className="w-full h-full object-cover group-hover:scale-105
+                                 transition-transform duration-300"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <BookOpen size={40} className="text-primary-200" />
+                    </div>
+                  )}
+                  <div className="absolute top-3 left-3">
+                    <span className={cn("badge text-xs capitalize",
+                      CAT_COLORS[post.category] || "badge-gray")}>
+                      {post.category}
+                    </span>
+                  </div>
+                </div>
+                <div className="p-5">
+                  <h3 className="font-display font-bold text-dark-800 mb-2
+                                 line-clamp-2 text-sm leading-snug
+                                 group-hover:text-primary-700 transition-colors">
+                    {post.title}
+                  </h3>
+                  {post.excerpt && (
+                    <p className="text-xs text-dark-500 line-clamp-2 mb-3 leading-relaxed">
+                      {post.excerpt}
+                    </p>
+                  )}
+                  <p className="text-xs text-dark-400">
+                    {post.publishedAt
+                      ? formatDateShort(
+                          (post.publishedAt as any)?.toDate?.()
+                            ? (post.publishedAt as any).toDate()
+                            : post.publishedAt
+                        )
+                      : "—"}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

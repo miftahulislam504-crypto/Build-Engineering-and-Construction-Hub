@@ -12,6 +12,23 @@ const nextConfig = {
       },
     ],
   },
+
+  // Bundle size optimization
+  experimental: {
+    optimizePackageImports: [
+      "lucide-react",
+      "recharts",
+      "react-icons",
+    ],
+  },
+
+  // Gzip compression
+  compress: true,
+
+  // Remove console.log in production
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production",
+  },
 };
 
 module.exports = nextConfig;
