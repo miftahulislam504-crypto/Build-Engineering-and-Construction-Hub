@@ -38,7 +38,7 @@ export default function LiveChat() {
     // Avoid loading twice
     if (document.getElementById("tawkto-script")) return;
 
-    window.Tawk_API      = window.Tawk_API || {};
+    window.Tawk_API = window.Tawk_API || ({} as Window["Tawk_API"]);
     window.Tawk_LoadStart = new Date();
 
     const script    = document.createElement("script");
