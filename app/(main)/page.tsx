@@ -7,7 +7,6 @@ import ServiceSection   from "@/components/home/ServiceSection";
 import BestSelling      from "@/components/home/BestSelling";
 import NewArrivals      from "@/components/home/NewArrivals";
 import PromoBanner      from "@/components/home/PromoBanner";
-import CalculatorPreview from "@/components/home/CalculatorPreview";
 import BlogSection      from "@/components/home/BlogSection";
 
 export default function HomePage() {
@@ -22,7 +21,6 @@ export default function HomePage() {
       <ServiceSection />
       <BestSelling />
       <NewArrivals />
-      <CalculatorPreview />
       <BlogSection />
     </div>
   );

@@ -81,11 +81,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           {/* Logo */}
           <div className="flex items-center justify-between p-5 border-b border-dark-800">
             <Link href="/admin/dashboard" className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">B</span>
-              </div>
+              <img src="/images/logo.png" alt="Build EngineX" className="w-8 h-8 object-contain" />
               <div>
-                <p className="font-display font-bold text-white text-sm">BuildMart</p>
+                <p className="font-display font-bold text-white text-sm">Build EngineX</p>
                 <p className="text-dark-400 text-2xs">Admin Panel</p>
               </div>
             </Link>

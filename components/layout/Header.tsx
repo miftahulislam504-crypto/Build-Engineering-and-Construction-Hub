@@ -28,7 +28,8 @@ export default function Header() {
   const [menuOpen,     setMenuOpen]     = useState(false);
   const [userOpen,     setUserOpen]     = useState(false);
   const [megaOpen,     setMegaOpen]     = useState(false);
-  const searchRef = useRef<HTMLDivElement>(null);
+  const searchRef    = useRef<HTMLDivElement>(null);
+  const userDropRef  = useRef<HTMLDivElement>(null);
 
   // Search suggestions (demo — Firestore দিয়ে replace করবে)
   useEffect(() => {
@@ -46,6 +47,8 @@ export default function Header() {
     function handler(e: MouseEvent) {
       if (searchRef.current && !searchRef.current.contains(e.target as Node))
         setSuggestions([]);
+      if (userDropRef.current && !userDropRef.current.contains(e.target as Node))
+        setUserOpen(false);
     }
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
@@ -95,6 +98,8 @@ export default function Header() {
       {/* ── Main Header ── */}
       <header className="bg-white shadow-header sticky top-0 z-50">
         <div className="container-main">
+
+          {/* Row 1: Logo + Icons (mobile) | Logo + Search + Icons (desktop) */}
           <div className="flex items-center gap-4 h-16">
 
             {/* Mobile menu button */}
@@ -108,19 +113,18 @@ export default function Header() {
             {/* Logo */}
             <Link href="/" className="flex-shrink-0">
               <div className="flex items-center gap-2">
-                <div className="w-9 h-9 bg-primary-600 rounded-xl flex items-center justify-center">
-                  <span className="text-white font-display font-bold text-lg">B</span>
-                </div>
-                <div className="hidden sm:block">
-                  <p className="font-display font-bold text-primary-800 text-lg leading-tight">
-                    BuildMart
-                  </p>
-                  <p className="text-dark-400 text-2xs leading-tight">BD</p>
-                </div>
+                <img
+                  src="/images/logo.png"
+                  alt="Build EngineX"
+                  className="w-10 h-10 object-contain"
+                />
+                <p className="font-display font-bold text-primary-800 text-lg leading-tight hidden sm:block">
+                  Build EngineX
+                </p>
               </div>
             </Link>
 
-            {/* Category button (desktop) */}
+            {/* Category button (desktop only) */}
             <button
               className="hidden lg:flex items-center gap-1.5 bg-primary-600 hover:bg-primary-700
                          text-white px-4 py-2 rounded-xl text-sm font-medium transition-colors
@@ -132,8 +136,8 @@ export default function Header() {
               <ChevronDown size={14} className={cn("transition-transform", megaOpen && "rotate-180")} />
             </button>
 
-            {/* Search Bar */}
-            <div ref={searchRef} className="flex-1 relative">
+            {/* Search Bar — desktop only (lg+) */}
+            <div ref={searchRef} className="hidden lg:block flex-1 relative">
               <form onSubmit={handleSearch}>
                 <div className="relative">
                   <Search
@@ -151,8 +155,6 @@ export default function Header() {
                   />
                 </div>
               </form>
-
-              {/* Search Suggestions */}
               {suggestions.length > 0 && (
                 <div className="absolute top-full left-0 right-0 mt-1 bg-white rounded-xl
                                 shadow-modal border border-dark-100 z-50 overflow-hidden
@@ -178,7 +180,7 @@ export default function Header() {
             </div>
 
             {/* Right Icons */}
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 ml-auto lg:ml-0">
 
               {/* Call Now (mobile) */}
               <a
@@ -223,7 +225,7 @@ export default function Header() {
               )}
 
               {/* User Account */}
-              <div className="relative">
+              <div className="relative" ref={userDropRef}>
                 {user ? (
                   <>
                     <button
@@ -252,10 +254,16 @@ export default function Header() {
                     </button>
 
                     {/* User Dropdown */}
-                    {userOpen && (
-                      <div className="absolute right-0 top-full mt-1 w-52 bg-white rounded-xl
-                                      shadow-modal border border-dark-100 z-50 overflow-hidden
-                                      animate-fade-in">
+                    {userOpen && (() => {
+                      const rect = userDropRef.current?.getBoundingClientRect();
+                      const dropWidth = 208; // w-52 = 13rem = 208px
+                      const rightEdge = rect ? Math.min(window.innerWidth - 8, rect.right) : 0;
+                      const leftPos = Math.max(8, rightEdge - dropWidth);
+                      return (
+                        <div
+                          className="fixed top-auto bg-white rounded-xl shadow-modal border border-dark-100 z-50 overflow-hidden animate-fade-in w-52"
+                          style={{ left: leftPos, top: rect ? rect.bottom + 4 : 64 }}
+                        >
                         <div className="px-4 py-3 border-b border-dark-100">
                           <p className="font-medium text-dark-800 text-sm truncate">{user.name}</p>
                           <p className="text-dark-400 text-xs truncate">{user.email}</p>
@@ -301,7 +309,8 @@ export default function Header() {
                           </button>
                         </div>
                       </div>
-                    )}
+                      );
+                    })()}
                   </>
                 ) : (
                   <div className="flex items-center gap-2">
@@ -319,6 +328,50 @@ export default function Header() {
               </div>
             </div>
           </div>
+
+          {/* Row 2: Search Bar — mobile only (below lg) */}
+          <div ref={searchRef} className="lg:hidden px-2 pb-3 relative">
+            <form onSubmit={handleSearch}>
+              <div className="relative">
+                <Search
+                  size={18}
+                  className="absolute left-3.5 top-1/2 -translate-y-1/2 text-dark-400"
+                />
+                <input
+                  type="text"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Search cement, steel, paint..."
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-dark-200
+                             text-sm focus:outline-none focus:ring-2 focus:ring-primary-500
+                             focus:border-transparent bg-dark-50"
+                />
+              </div>
+            </form>
+            {suggestions.length > 0 && (
+              <div className="absolute top-full left-2 right-2 mt-0 bg-white rounded-xl
+                              shadow-modal border border-dark-100 z-50 overflow-hidden
+                              animate-fade-in">
+                {suggestions.map((s) => (
+                  <button
+                    key={s}
+                    onClick={() => {
+                      setSearch(s);
+                      setSuggestions([]);
+                      router.push(`/search?q=${encodeURIComponent(s)}`);
+                    }}
+                    className="w-full flex items-center gap-3 px-4 py-2.5
+                               hover:bg-dark-50 text-sm text-dark-700 text-left
+                               transition-colors"
+                  >
+                    <Search size={14} className="text-dark-400 flex-shrink-0" />
+                    {s}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
         </div>
 
         {/* Mega Menu */}

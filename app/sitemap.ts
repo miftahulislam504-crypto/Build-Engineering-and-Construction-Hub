@@ -3,7 +3,7 @@ import { MetadataRoute } from "next";
 import { collection, getDocs, query, where, orderBy } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://buildmartbd.com";
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://buildenginex.vercel.app";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPages: MetadataRoute.Sitemap = [

@@ -26,7 +26,6 @@ const SERVICE_LINKS = [
   { label: "Construction Services", href: "/services/construction-services" },
   { label: "Consultancy Services",  href: "/services/consultancy-services"  },
   { label: "Survey Services",       href: "/services/survey-services"       },
-  { label: "BOQ Generator",         href: "/calculator"                     },
 ];
 
 const QUICK_LINKS = [
@@ -54,12 +53,10 @@ export default function Footer() {
           <div className="lg:col-span-2 space-y-5">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-primary-600 rounded-xl flex items-center justify-center">
-                <span className="text-white font-display font-bold text-xl">B</span>
-              </div>
+              <img src="/images/logo.png" alt="Build EngineX" className="w-10 h-10 object-contain" />
               <div>
                 <p className="font-display font-bold text-white text-xl leading-tight">
-                  BuildMart BD
+                  Build EngineX
                 </p>
                 <p className="text-dark-400 text-xs">
                   Construction Marketplace
@@ -229,7 +226,7 @@ export default function Footer() {
         <div className="container-main py-5">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
             <p className="text-xs text-dark-500 text-center sm:text-left">
-              &copy; {year} BuildMart BD. All rights reserved.
+              &copy; {year} Build EngineX. All rights reserved.
             </p>
             <div className="flex items-center gap-4">
               {[

@@ -1,7 +1,7 @@
 // app/robots.ts
 import { MetadataRoute } from "next";
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://buildmartbd.com";
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://buildenginex.vercel.app";
 
 export default function robots(): MetadataRoute.Robots {
   return {

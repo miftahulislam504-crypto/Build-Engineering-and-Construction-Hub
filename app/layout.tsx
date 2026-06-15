@@ -21,8 +21,8 @@ export const metadata: Metadata = {
     process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
   ),
   title: {
-    default: "BuildMart BD — Construction Materials & Engineering Services",
-    template: "%s | BuildMart BD",
+    default: "Build EngineX — Construction Materials & Engineering Services",
+    template: "%s | Build EngineX",
   },
   description:
     "Bangladesh-এর সেরা Construction Materials ও Engineering Services Marketplace। Cement, Steel, Paint, Electrical, Sanitary সহ সব ধরনের নির্মাণ সামগ্রী।",
@@ -39,14 +39,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_BD",
-    siteName: "BuildMart BD",
-    title: "BuildMart BD — Construction Materials & Engineering Services",
+    siteName: "Build EngineX",
+    title: "Build EngineX — Construction Materials & Engineering Services",
     description:
       "Bangladesh-এর সেরা Construction Materials ও Engineering Services Marketplace।",
   },
   twitter: {
     card: "summary_large_image",
-    title: "BuildMart BD",
+    title: "Build EngineX",
     description: "Construction Materials & Engineering Services Marketplace",
   },
   robots: { index: true, follow: true },

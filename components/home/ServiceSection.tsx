@@ -1,17 +1,26 @@
 "use client";
 // components/home/ServiceSection.tsx
 import Link from "next/link";
-import { ArrowRight, MessageSquare, Calendar } from "lucide-react";
+import { ArrowRight, MessageSquare, Calendar, PenTool, Construction, ClipboardList, MapPin } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
+import { LucideIcon } from "lucide-react";
 
-const SERVICES = [
+const SERVICES: {
+  slug: string;
+  name: string;
+  category: string;
+  description: string;
+  startingPrice: number;
+  Icon: LucideIcon;
+  color: string;
+}[] = [
   {
     slug: "architectural-design",
     name: "Architectural Design",
     category: "Design Services",
     description: "Complete architectural design for residential and commercial buildings.",
     startingPrice: 15000,
-    icon: "✏️",
+    Icon: PenTool,
     color: "bg-blue-50 text-blue-700",
   },
   {
@@ -20,7 +29,7 @@ const SERVICES = [
     category: "Design Services",
     description: "Professional structural engineering design with safety compliance.",
     startingPrice: 20000,
-    icon: "🏗️",
+    Icon: Construction,
     color: "bg-orange-50 text-orange-700",
   },
   {
@@ -29,7 +38,7 @@ const SERVICES = [
     category: "Consultancy",
     description: "Detailed Bill of Quantities for accurate project cost estimation.",
     startingPrice: 8000,
-    icon: "📋",
+    Icon: ClipboardList,
     color: "bg-green-50 text-green-700",
   },
   {
@@ -38,7 +47,7 @@ const SERVICES = [
     category: "Survey Services",
     description: "Accurate land surveying with modern equipment and certified surveyors.",
     startingPrice: 5000,
-    icon: "🗺️",
+    Icon: MapPin,
     color: "bg-purple-50 text-purple-700",
   },
 ];
@@ -64,8 +73,8 @@ export default function ServiceSection() {
                                            transition-shadow duration-200">
               {/* Icon */}
               <div className={`w-12 h-12 rounded-xl flex items-center justify-center
-                               text-2xl mb-4 ${svc.color}`}>
-                {svc.icon}
+                               mb-4 ${svc.color}`}>
+                <svc.Icon size={22} />
               </div>
 
               {/* Category */}

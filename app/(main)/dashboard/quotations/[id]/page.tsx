@@ -199,7 +199,7 @@ export default function QuotationDetailsPage() {
         <div className="card p-5 border-blue-200 bg-blue-50 space-y-4">
           <h2 className="font-semibold text-blue-800 text-sm flex items-center gap-2">
             <Send size={15} />
-            Quotation from BuildMart BD
+            Quotation from Build EngineX
           </h2>
 
           <p className="text-sm text-blue-700 leading-relaxed">

@@ -1,25 +1,26 @@
 // components/home/CalculatorPreview.tsx
 import Link from "next/link";
-import { Calculator, ArrowRight } from "lucide-react";
+import { Calculator, ArrowRight, BarChart2, Ruler, DollarSign } from "lucide-react";
+import { LucideIcon } from "lucide-react";
 
-const TOOLS = [
+const TOOLS: { title: string; desc: string; href: string; Icon: LucideIcon }[] = [
   {
     title: "BOQ Generator",
     desc:  "Generate complete Bill of Quantities for your project",
     href:  "/calculator?tool=boq",
-    icon:  "📊",
+    Icon:  BarChart2,
   },
   {
     title: "Material Estimator",
     desc:  "Calculate cement, steel, brick, sand quantities",
     href:  "/calculator?tool=material",
-    icon:  "🧮",
+    Icon:  Ruler,
   },
   {
     title: "Cost Estimator",
     desc:  "Get approximate construction cost for your project",
     href:  "/calculator?tool=cost",
-    icon:  "💰",
+    Icon:  DollarSign,
   },
 ];
 
@@ -52,7 +53,10 @@ export default function CalculatorPreview() {
                          rounded-2xl p-6 text-white transition-all duration-200
                          group"
             >
-              <span className="text-4xl mb-4 block">{tool.icon}</span>
+              <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center
+                              justify-center mb-4">
+                <tool.Icon size={22} className="text-white" />
+              </div>
               <h3 className="font-display font-bold mb-2">{tool.title}</h3>
               <p className="text-primary-200 text-sm leading-relaxed">{tool.desc}</p>
               <div className="flex items-center gap-1.5 mt-4 text-primary-200

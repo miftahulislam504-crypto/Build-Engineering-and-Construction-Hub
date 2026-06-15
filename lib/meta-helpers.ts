@@ -9,7 +9,7 @@
 import type { Metadata } from "next";
 import { getProductBySlug } from "@/lib/firestore";
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://buildmartbd.com";
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://buildenginex.vercel.app";
 
 export async function generateMetadata({
   params,
@@ -20,12 +20,12 @@ export async function generateMetadata({
 
   if (!product) {
     return {
-      title: "Product Not Found | BuildMart BD",
+      title: "Product Not Found | Build EngineX",
     };
   }
 
   return {
-    title:       `${product.name} | BuildMart BD`,
+    title:       `${product.name} | Build EngineX`,
     description: product.shortDescription || product.description?.slice(0, 160),
     keywords: [
       product.name,
@@ -35,7 +35,7 @@ export async function generateMetadata({
       "building materials price BD",
     ].filter(Boolean),
     openGraph: {
-      title:       `${product.name} — ${product.brand?.name || "BuildMart BD"}`,
+      title:       `${product.name} — ${product.brand?.name || "Build EngineX"}`,
       description: product.shortDescription || "",
       images:      product.primaryImage ? [{ url: product.primaryImage }] : [],
       url:         `${APP_URL}/products/${product.slug}`,
@@ -67,11 +67,11 @@ export async function generateMetadata({
   const service = await getServiceBySlug(params.slug);
 
   if (!service) {
-    return { title: "Service Not Found | BuildMart BD" };
+    return { title: "Service Not Found | Build EngineX" };
   }
 
   return {
-    title:       `${service.name} | BuildMart BD`,
+    title:       `${service.name} | Build EngineX`,
     description: service.shortDescription || service.description?.slice(0, 160),
     keywords: [
       service.name,
@@ -80,7 +80,7 @@ export async function generateMetadata({
       service.serviceCategory,
     ],
     openGraph: {
-      title:       `${service.name} | BuildMart BD`,
+      title:       `${service.name} | Build EngineX`,
       description: service.shortDescription || "",
       images:      service.images?.[0] ? [{ url: service.images[0] }] : [],
     },
@@ -105,10 +105,10 @@ export async function generateMetadata({
   );
   const post = posts[0];
 
-  if (!post) return { title: "Post Not Found | BuildMart BD" };
+  if (!post) return { title: "Post Not Found | Build EngineX" };
 
   return {
-    title:       `${post.title} | BuildMart BD`,
+    title:       `${post.title} | Build EngineX`,
     description: post.excerpt || post.content?.slice(0, 160),
     openGraph: {
       title:       post.title,

@@ -1,19 +1,24 @@
 import Link from "next/link";
+import {
+  Construction, Wrench, Layers, Zap, Droplets,
+  FlaskConical, SquareSquare, DoorOpen, BrickWall,
+  Mountain, Fence, Shield, Hammer,
+} from "lucide-react";
 
 const CATS = [
-  { label: "Cement",        slug: "cement",                  icon: "🏗️", color: "bg-blue-50   text-blue-700"   },
-  { label: "Steel",         slug: "steel",                   icon: "⚙️", color: "bg-gray-50   text-gray-700"   },
-  { label: "Paint",         slug: "paint",                   icon: "🎨", color: "bg-pink-50   text-pink-700"   },
-  { label: "Electrical",    slug: "electrical",              icon: "⚡", color: "bg-yellow-50 text-yellow-700" },
-  { label: "Sanitary",      slug: "sanitary-bathroom",       icon: "🚿", color: "bg-cyan-50   text-cyan-700"   },
-  { label: "Waterproofing", slug: "chemical-waterproofing",  icon: "🧪", color: "bg-green-50  text-green-700"  },
-  { label: "Tiles",         slug: "tile-ceramics",           icon: "🔲", color: "bg-orange-50 text-orange-700" },
-  { label: "Doors",         slug: "doors-windows",           icon: "🚪", color: "bg-amber-50  text-amber-700"  },
-  { label: "Bricks",        slug: "bricks",                  icon: "🧱", color: "bg-red-50    text-red-700"    },
-  { label: "Sand",          slug: "sand",                    icon: "⛱️", color: "bg-yellow-50 text-yellow-700" },
-  { label: "Stone Chips",   slug: "stone-chips",             icon: "🪨", color: "bg-stone-50  text-stone-700"  },
-  { label: "Safety",        slug: "safety-equipment",        icon: "🦺", color: "bg-lime-50   text-lime-700"   },
-  { label: "Services",      slug: null, href: "/services",   icon: "🔧", color: "bg-purple-50 text-purple-700" },
+  { label: "Cement",        slug: "cement",               href: null,       Icon: Construction,  color: "bg-blue-50   text-blue-700"   },
+  { label: "Steel",         slug: "steel",                href: null,       Icon: Wrench,         color: "bg-gray-50   text-gray-700"   },
+  { label: "Paint",         slug: "paint",                href: null,       Icon: Layers,         color: "bg-pink-50   text-pink-700"   },
+  { label: "Electrical",    slug: "electrical",           href: null,       Icon: Zap,            color: "bg-yellow-50 text-yellow-700" },
+  { label: "Sanitary",      slug: "sanitary-bathroom",    href: null,       Icon: Droplets,       color: "bg-cyan-50   text-cyan-700"   },
+  { label: "Waterproofing", slug: "chemical-waterproofing", href: null,     Icon: FlaskConical,   color: "bg-green-50  text-green-700"  },
+  { label: "Tiles",         slug: "tile-ceramics",        href: null,       Icon: SquareSquare,   color: "bg-orange-50 text-orange-700" },
+  { label: "Doors",         slug: "doors-windows",        href: null,       Icon: DoorOpen,       color: "bg-amber-50  text-amber-700"  },
+  { label: "Bricks",        slug: "bricks",               href: null,       Icon: BrickWall,      color: "bg-red-50    text-red-700"    },
+  { label: "Sand",          slug: "sand",                 href: null,       Icon: Mountain,       color: "bg-yellow-50 text-yellow-700" },
+  { label: "Stone Chips",   slug: "stone-chips",          href: null,       Icon: Fence,          color: "bg-stone-50  text-stone-700"  },
+  { label: "Safety",        slug: "safety-equipment",     href: null,       Icon: Shield,         color: "bg-lime-50   text-lime-700"   },
+  { label: "Services",      slug: null,                   href: "/services", Icon: Hammer,        color: "bg-purple-50 text-purple-700" },
 ];
 
 export default function QuickCategories() {
@@ -32,10 +37,10 @@ export default function QuickCategories() {
             >
               <div
                 className={`w-12 h-12 rounded-xl flex items-center justify-center
-                            text-2xl ${cat.color} group-hover:scale-110
+                            ${cat.color} group-hover:scale-110
                             transition-transform duration-200`}
               >
-                {cat.icon}
+                <cat.Icon size={22} />
               </div>
               <span className="text-xs font-medium text-dark-600 text-center
                                leading-tight group-hover:text-primary-700

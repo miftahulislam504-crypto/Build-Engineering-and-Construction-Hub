@@ -74,8 +74,8 @@ export default function ContactPage() {
               {
                 icon: Mail,
                 label: "Email",
-                value: "info@buildmartbd.com",
-                href:  "mailto:info@buildmartbd.com",
+                value: "info@buildenginex.vercel.app",
+                href:  "mailto:info@buildenginex.vercel.app",
                 color: "bg-orange-50 text-orange-600",
               },
               {

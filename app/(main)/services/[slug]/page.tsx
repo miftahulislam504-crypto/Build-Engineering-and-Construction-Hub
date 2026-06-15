@@ -6,6 +6,7 @@ import Link from "next/link";
 import {
   Star, CheckCircle2, ChevronRight, ChevronDown,
   ChevronUp, Calendar, MessageSquare, Loader2, Phone,
+  PenTool, Construction, ClipboardList, MapPin,
 } from "lucide-react";
 import { getServiceBySlug } from "@/lib/firestore";
 import { createServiceRequest } from "@/lib/firestore";
@@ -122,11 +123,12 @@ export default function ServiceDetailsPage() {
                 <img src={service.images[0]} alt={service.name}
                   className="w-full h-full object-cover" />
               ) : (
-                <span className="text-8xl">
-                  {service.serviceCategory === "design"       ? "✏️" :
-                   service.serviceCategory === "construction" ? "🏗️" :
-                   service.serviceCategory === "consultancy"  ? "📋" : "🗺️"}
-                </span>
+                <div className="flex items-center justify-center w-24 h-24 rounded-2xl bg-primary-200">
+                  {service.serviceCategory === "design"       ? <PenTool size={48} className="text-primary-700" /> :
+                   service.serviceCategory === "construction" ? <Construction size={48} className="text-primary-700" /> :
+                   service.serviceCategory === "consultancy"  ? <ClipboardList size={48} className="text-primary-700" /> :
+                                                                <MapPin size={48} className="text-primary-700" />}
+                </div>
               )}
             </div>
 
