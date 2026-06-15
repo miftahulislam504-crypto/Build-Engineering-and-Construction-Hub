@@ -5,9 +5,9 @@ import Link from "next/link";
 import {
   Package, Wrench, HardHat, Zap, Droplets,
   Layers, DoorOpen, BrickWall, Mountain, Shield,
-  PenTool, Building, BookOpen, MapPin, ChevronRight,
-  FlaskConical, SquareSquare, Hammer, Construction,
-  HardHat as HardHatIcon, Fence, ClipboardList,
+  PenTool, Building, MapPin, ChevronRight,
+  FlaskConical, Grid2X2, Hammer, Construction,
+  Fence, ClipboardList,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -25,7 +25,7 @@ const MENU = [
       { label: "Electrical",            slug: "electrical",           icon: Zap,            brands: ["BRB Cable", "Bizli Cable", "Super Star", "SQ Group"] },
       { label: "Sanitary & Bathroom",   slug: "sanitary-bathroom",    icon: Droplets,       brands: ["Kohler", "Grohe", "Shine", "Bengal Sanitary"] },
       { label: "Chemical & Waterproofing", slug: "chemical-waterproofing", icon: FlaskConical, brands: ["Sika", "Dr Fixit"] },
-      { label: "Tile & Ceramics",       slug: "tile-ceramics",        icon: SquareSquare,   brands: ["RAK Ceramics", "Akij Ceramics", "Great Wall"] },
+      { label: "Tile & Ceramics",       slug: "tile-ceramics",        icon: Grid2X2,        brands: ["RAK Ceramics", "Akij Ceramics", "Great Wall"] },
       { label: "Doors & Windows",       slug: "doors-windows",        icon: DoorOpen,       brands: ["Bashundhara", "RFL"] },
     ],
   },

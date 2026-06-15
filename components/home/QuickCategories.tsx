@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {
   Construction, Wrench, Layers, Zap, Droplets,
-  FlaskConical, SquareSquare, DoorOpen, BrickWall,
+  FlaskConical, Grid2X2, DoorOpen, BrickWall,
   Mountain, Fence, Shield, Hammer,
 } from "lucide-react";
 
@@ -12,7 +12,7 @@ const CATS = [
   { label: "Electrical",    slug: "electrical",           href: null,       Icon: Zap,            color: "bg-yellow-50 text-yellow-700" },
   { label: "Sanitary",      slug: "sanitary-bathroom",    href: null,       Icon: Droplets,       color: "bg-cyan-50   text-cyan-700"   },
   { label: "Waterproofing", slug: "chemical-waterproofing", href: null,     Icon: FlaskConical,   color: "bg-green-50  text-green-700"  },
-  { label: "Tiles",         slug: "tile-ceramics",        href: null,       Icon: SquareSquare,   color: "bg-orange-50 text-orange-700" },
+  { label: "Tiles",         slug: "tile-ceramics",        href: null,       Icon: Grid2X2,        color: "bg-orange-50 text-orange-700" },
   { label: "Doors",         slug: "doors-windows",        href: null,       Icon: DoorOpen,       color: "bg-amber-50  text-amber-700"  },
   { label: "Bricks",        slug: "bricks",               href: null,       Icon: BrickWall,      color: "bg-red-50    text-red-700"    },
   { label: "Sand",          slug: "sand",                 href: null,       Icon: Mountain,       color: "bg-yellow-50 text-yellow-700" },
