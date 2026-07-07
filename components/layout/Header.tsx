@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Search, ShoppingCart, Heart, Bell, User,
   Phone, Menu, X, ChevronDown, LogOut,
@@ -125,7 +126,8 @@ export default function Header() {
             </Link>
 
             {/* Category button (desktop only) */}
-            <button
+            <motion.button
+              whileTap={{ scale: 0.96 }}
               className="hidden lg:flex items-center gap-1.5 bg-primary-600 hover:bg-primary-700
                          text-white px-4 py-2 rounded-xl text-sm font-medium transition-colors
                          flex-shrink-0"
@@ -133,8 +135,10 @@ export default function Header() {
             >
               <Menu size={16} />
               All Categories
-              <ChevronDown size={14} className={cn("transition-transform", megaOpen && "rotate-180")} />
-            </button>
+              <motion.span animate={{ rotate: megaOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
+                <ChevronDown size={14} />
+              </motion.span>
+            </motion.button>
 
             {/* Search Bar — desktop only (lg+) */}
             <div ref={searchRef} className="hidden lg:block flex-1 relative">
@@ -155,28 +159,36 @@ export default function Header() {
                   />
                 </div>
               </form>
-              {suggestions.length > 0 && (
-                <div className="absolute top-full left-0 right-0 mt-1 bg-white rounded-xl
-                                shadow-modal border border-dark-100 z-50 overflow-hidden
-                                animate-fade-in">
-                  {suggestions.map((s) => (
-                    <button
-                      key={s}
-                      onClick={() => {
-                        setSearch(s);
-                        setSuggestions([]);
-                        router.push(`/search?q=${encodeURIComponent(s)}`);
-                      }}
-                      className="w-full flex items-center gap-3 px-4 py-2.5
-                                 hover:bg-dark-50 text-sm text-dark-700 text-left
-                                 transition-colors"
-                    >
-                      <Search size={14} className="text-dark-400 flex-shrink-0" />
-                      {s}
-                    </button>
-                  ))}
-                </div>
-              )}
+              <AnimatePresence>
+                {suggestions.length > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -8, scale: 0.98 }}
+                    transition={{ duration: 0.18, ease: "easeOut" }}
+                    className="absolute top-full left-0 right-0 mt-1 bg-white rounded-xl
+                                    shadow-modal border border-dark-100 z-50 overflow-hidden
+                                    origin-top"
+                  >
+                    {suggestions.map((s) => (
+                      <motion.button
+                        key={s}
+                        whileHover={{ backgroundColor: "rgba(0,0,0,0.02)" }}
+                        onClick={() => {
+                          setSearch(s);
+                          setSuggestions([]);
+                          router.push(`/search?q=${encodeURIComponent(s)}`);
+                        }}
+                        className="w-full flex items-center gap-3 px-4 py-2.5
+                                   text-sm text-dark-700 text-left"
+                      >
+                        <Search size={14} className="text-dark-400 flex-shrink-0" />
+                        {s}
+                      </motion.button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             {/* Right Icons */}
@@ -191,31 +203,52 @@ export default function Header() {
               </a>
 
               {/* Wishlist */}
-              <Link href="/wishlist" className="relative btn-icon btn-ghost">
-                <Heart size={20} />
-                {wishCount() > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-red-500
-                                   text-white text-2xs rounded-full flex items-center
-                                   justify-center font-medium">
-                    {wishCount()}
-                  </span>
-                )}
-              </Link>
+              <motion.div whileTap={{ scale: 0.85 }}>
+                <Link href="/wishlist" className="relative btn-icon btn-ghost">
+                  <Heart size={20} />
+                  <AnimatePresence>
+                    {wishCount() > 0 && (
+                      <motion.span
+                        key={wishCount()}
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        exit={{ scale: 0 }}
+                        transition={{ type: "spring", stiffness: 500, damping: 15 }}
+                        className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-red-500
+                                       text-white text-2xs rounded-full flex items-center
+                                       justify-center font-medium"
+                      >
+                        {wishCount()}
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                </Link>
+              </motion.div>
 
               {/* Cart */}
-              <button
+              <motion.button
                 onClick={toggleCart}
+                whileTap={{ scale: 0.85 }}
                 className="relative btn-icon btn-ghost"
               >
                 <ShoppingCart size={20} />
-                {totalItems() > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-primary-600
-                                   text-white text-2xs rounded-full flex items-center
-                                   justify-center font-medium">
-                    {totalItems() > 9 ? "9+" : totalItems()}
-                  </span>
-                )}
-              </button>
+                <AnimatePresence>
+                  {totalItems() > 0 && (
+                    <motion.span
+                      key={totalItems()}
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      exit={{ scale: 0 }}
+                      transition={{ type: "spring", stiffness: 500, damping: 15 }}
+                      className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-primary-600
+                                       text-white text-2xs rounded-full flex items-center
+                                       justify-center font-medium"
+                    >
+                      {totalItems() > 9 ? "9+" : totalItems()}
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </motion.button>
 
               {/* Notifications (logged in) */}
               {user && (
@@ -254,14 +287,19 @@ export default function Header() {
                     </button>
 
                     {/* User Dropdown */}
+                    <AnimatePresence>
                     {userOpen && (() => {
                       const rect = userDropRef.current?.getBoundingClientRect();
                       const dropWidth = 208; // w-52 = 13rem = 208px
                       const rightEdge = rect ? Math.min(window.innerWidth - 8, rect.right) : 0;
                       const leftPos = Math.max(8, rightEdge - dropWidth);
                       return (
-                        <div
-                          className="fixed top-auto bg-white rounded-xl shadow-modal border border-dark-100 z-50 overflow-hidden animate-fade-in w-52"
+                        <motion.div
+                          initial={{ opacity: 0, y: -8, scale: 0.96 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: -8, scale: 0.96 }}
+                          transition={{ duration: 0.16, ease: "easeOut" }}
+                          className="fixed top-auto bg-white rounded-xl shadow-modal border border-dark-100 z-50 overflow-hidden w-52 origin-top-right"
                           style={{ left: leftPos, top: rect ? rect.bottom + 4 : 64 }}
                         >
                         <div className="px-4 py-3 border-b border-dark-100">
@@ -308,9 +346,10 @@ export default function Header() {
                             Logout
                           </button>
                         </div>
-                      </div>
+                      </motion.div>
                       );
                     })()}
+                    </AnimatePresence>
                   </>
                 ) : (
                   <div className="flex items-center gap-2">
@@ -348,59 +387,90 @@ export default function Header() {
                 />
               </div>
             </form>
-            {suggestions.length > 0 && (
-              <div className="absolute top-full left-2 right-2 mt-0 bg-white rounded-xl
-                              shadow-modal border border-dark-100 z-50 overflow-hidden
-                              animate-fade-in">
-                {suggestions.map((s) => (
-                  <button
-                    key={s}
-                    onClick={() => {
-                      setSearch(s);
-                      setSuggestions([]);
-                      router.push(`/search?q=${encodeURIComponent(s)}`);
-                    }}
-                    className="w-full flex items-center gap-3 px-4 py-2.5
-                               hover:bg-dark-50 text-sm text-dark-700 text-left
-                               transition-colors"
-                  >
-                    <Search size={14} className="text-dark-400 flex-shrink-0" />
-                    {s}
-                  </button>
-                ))}
-              </div>
-            )}
+            <AnimatePresence>
+              {suggestions.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.18, ease: "easeOut" }}
+                  className="absolute top-full left-2 right-2 mt-0 bg-white rounded-xl
+                                  shadow-modal border border-dark-100 z-50 overflow-hidden"
+                >
+                  {suggestions.map((s) => (
+                    <button
+                      key={s}
+                      onClick={() => {
+                        setSearch(s);
+                        setSuggestions([]);
+                        router.push(`/search?q=${encodeURIComponent(s)}`);
+                      }}
+                      className="w-full flex items-center gap-3 px-4 py-2.5
+                                 hover:bg-dark-50 text-sm text-dark-700 text-left
+                                 transition-colors"
+                    >
+                      <Search size={14} className="text-dark-400 flex-shrink-0" />
+                      {s}
+                    </button>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
         </div>
 
         {/* Mega Menu */}
-        {megaOpen && (
-          <div className="hidden lg:block border-t border-dark-100">
-            <MegaMenu onClose={() => setMegaOpen(false)} />
-          </div>
-        )}
+        <AnimatePresence>
+          {megaOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.25, ease: "easeInOut" }}
+              className="hidden lg:block border-t border-dark-100 overflow-hidden"
+            >
+              <MegaMenu onClose={() => setMegaOpen(false)} />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
       {/* Mobile Menu Drawer */}
-      {menuOpen && (
-        <div className="fixed inset-0 z-40 lg:hidden">
-          <div
-            className="absolute inset-0 bg-black/50"
-            onClick={() => setMenuOpen(false)}
-          />
-          <div className="absolute left-0 top-0 bottom-0 w-72 bg-white shadow-xl
-                          overflow-y-auto animate-slide-up">
-            <div className="p-4 border-b border-dark-100 flex items-center justify-between">
-              <p className="font-display font-bold text-primary-800">Menu</p>
-              <button onClick={() => setMenuOpen(false)} className="btn-icon btn-ghost">
-                <X size={20} />
-              </button>
-            </div>
-            <MegaMenu onClose={() => setMenuOpen(false)} mobile />
+      <AnimatePresence>
+        {menuOpen && (
+          <div className="fixed inset-0 z-40 lg:hidden">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="absolute inset-0 bg-black/50"
+              onClick={() => setMenuOpen(false)}
+            />
+            <motion.div
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ type: "tween", duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute left-0 top-0 bottom-0 w-72 bg-white shadow-xl
+                              overflow-y-auto"
+            >
+              <div className="p-4 border-b border-dark-100 flex items-center justify-between">
+                <p className="font-display font-bold text-primary-800">Menu</p>
+                <motion.button
+                  whileTap={{ scale: 0.85 }}
+                  onClick={() => setMenuOpen(false)}
+                  className="btn-icon btn-ghost"
+                >
+                  <X size={20} />
+                </motion.button>
+              </div>
+              <MegaMenu onClose={() => setMenuOpen(false)} mobile />
+            </motion.div>
           </div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
     </>
   );
 }

@@ -1,9 +1,14 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
 import {
   Construction, Wrench, Layers, Zap, Droplets,
   FlaskConical, Grid2X2, DoorOpen, BrickWall,
   Mountain, Fence, Shield, Hammer,
 } from "lucide-react";
+import { StaggerGrid, StaggerItem } from "@/components/motion/StaggerGrid";
+import Reveal from "@/components/motion/Reveal";
 
 const CATS = [
   { label: "Cement",        slug: "cement",               href: null,       Icon: Construction,  color: "bg-blue-50   text-blue-700"   },
@@ -25,31 +30,36 @@ export default function QuickCategories() {
   return (
     <section className="py-10 bg-white">
       <div className="container-main">
-        <h2 className="section-title">Shop by Category</h2>
-        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 gap-3">
+        <Reveal>
+          <h2 className="section-title">Shop by Category</h2>
+        </Reveal>
+        <StaggerGrid className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 gap-3">
           {CATS.map((cat) => (
-            <Link
-              key={cat.label}
-              href={cat.href ?? `/category/${cat.slug}`}
-              className="flex flex-col items-center gap-2.5 p-3 rounded-2xl
-                         border border-dark-100 hover:border-primary-200
-                         hover:shadow-card transition-all duration-200 group"
-            >
-              <div
-                className={`w-12 h-12 rounded-xl flex items-center justify-center
-                            ${cat.color} group-hover:scale-110
-                            transition-transform duration-200`}
-              >
-                <cat.Icon size={22} />
-              </div>
-              <span className="text-xs font-medium text-dark-600 text-center
-                               leading-tight group-hover:text-primary-700
-                               transition-colors">
-                {cat.label}
-              </span>
-            </Link>
+            <StaggerItem key={cat.label}>
+              <motion.div whileTap={{ scale: 0.92 }}>
+                <Link
+                  href={cat.href ?? `/category/${cat.slug}`}
+                  className="flex flex-col items-center gap-2.5 p-3 rounded-2xl
+                             border border-dark-100 hover:border-primary-200
+                             hover:shadow-card transition-all duration-200 group"
+                >
+                  <motion.div
+                    whileHover={{ scale: 1.15, rotate: 6 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                    className={`w-12 h-12 rounded-xl flex items-center justify-center ${cat.color}`}
+                  >
+                    <cat.Icon size={22} />
+                  </motion.div>
+                  <span className="text-xs font-medium text-dark-600 text-center
+                                   leading-tight group-hover:text-primary-700
+                                   transition-colors">
+                    {cat.label}
+                  </span>
+                </Link>
+              </motion.div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerGrid>
       </div>
     </section>
   );
