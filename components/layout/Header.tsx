@@ -112,15 +112,15 @@ export default function Header() {
             </button>
 
             {/* Logo */}
-            <Link href="/" className="flex-shrink-0">
+            <Link href="/" className="flex-shrink-0 min-w-0">
               <div className="flex items-center gap-2">
                 <img
                   src="/images/logo.png"
-                  alt="Build EngineX"
-                  className="w-10 h-10 object-contain"
+                  alt="EngineX Mart"
+                  className="w-9 h-9 sm:w-10 sm:h-10 object-contain flex-shrink-0"
                 />
-                <p className="font-display font-bold text-primary-800 text-lg leading-tight hidden sm:block">
-                  Build EngineX
+                <p className="font-display font-bold text-primary-800 text-sm sm:text-lg leading-tight truncate max-w-[110px] sm:max-w-none">
+                  EngineX Mart
                 </p>
               </div>
             </Link>
@@ -193,14 +193,6 @@ export default function Header() {
 
             {/* Right Icons */}
             <div className="flex items-center gap-1 ml-auto lg:ml-0">
-
-              {/* Call Now (mobile) */}
-              <a
-                href={`tel:${process.env.NEXT_PUBLIC_CALL_NUMBER}`}
-                className="lg:hidden btn-icon btn-ghost text-primary-600"
-              >
-                <Phone size={20} />
-              </a>
 
               {/* Wishlist */}
               <motion.div whileTap={{ scale: 0.85 }}>

@@ -33,7 +33,44 @@ export default function QuickCategories() {
         <Reveal>
           <h2 className="section-title">Shop by Category</h2>
         </Reveal>
-        <StaggerGrid className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 gap-3">
+      </div>
+
+      {/* Mobile/tablet: 2-row horizontal scroll, larger tiles */}
+      <div className="lg:hidden overflow-x-auto no-scrollbar px-4 sm:px-6 snap-x snap-mandatory">
+        <StaggerGrid
+          className="grid grid-rows-2 grid-flow-col auto-cols-[27%] sm:auto-cols-[19%] gap-x-3 gap-y-4 pb-2"
+        >
+          {CATS.map((cat) => (
+            <StaggerItem key={cat.label}>
+              <motion.div whileTap={{ scale: 0.92 }} className="snap-start">
+                <Link
+                  href={cat.href ?? `/category/${cat.slug}`}
+                  className="flex flex-col items-center gap-2.5 p-3 rounded-2xl
+                             border border-dark-100 hover:border-primary-200
+                             hover:shadow-card transition-all duration-200 group"
+                >
+                  <motion.div
+                    whileHover={{ scale: 1.15, rotate: 6 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                    className={`w-16 h-16 rounded-2xl flex items-center justify-center ${cat.color}`}
+                  >
+                    <cat.Icon size={30} />
+                  </motion.div>
+                  <span className="text-xs font-medium text-dark-600 text-center
+                                   leading-tight group-hover:text-primary-700
+                                   transition-colors">
+                    {cat.label}
+                  </span>
+                </Link>
+              </motion.div>
+            </StaggerItem>
+          ))}
+        </StaggerGrid>
+      </div>
+
+      {/* Desktop: full static grid, no scroll needed */}
+      <div className="hidden lg:block container-main">
+        <StaggerGrid className="grid grid-cols-6 xl:grid-cols-7 gap-3">
           {CATS.map((cat) => (
             <StaggerItem key={cat.label}>
               <motion.div whileTap={{ scale: 0.92 }}>

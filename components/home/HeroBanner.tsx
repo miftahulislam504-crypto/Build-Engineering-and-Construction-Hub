@@ -37,11 +37,11 @@ export default function HeroBanner() {
   const next = () => setCurrent((c) => (c + 1) % banners.length);
 
   if (isLoading) {
-    return <div className="w-full h-[320px] sm:h-[400px] md:h-[500px] skeleton" />;
+    return <div className="w-full h-[440px] sm:h-[480px] md:h-[560px] lg:h-[600px] skeleton" />;
   }
 
   return (
-    <div className="relative w-full h-[320px] sm:h-[400px] md:h-[500px] overflow-hidden">
+    <div className="relative w-full h-[440px] sm:h-[480px] md:h-[560px] lg:h-[600px] overflow-hidden">
       <AnimatePresence initial={false} mode="popLayout">
         {banners.map((banner: any, i: number) =>
           i === current ? (
@@ -61,15 +61,25 @@ export default function HeroBanner() {
                     className="w-full h-full object-cover"
                     loading={i === 0 ? "eager" : "lazy"}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/35 to-black/10
                                   flex items-center">
                     <div className="container-main text-white">
+                      <motion.span
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.05, ease: "easeOut" }}
+                        className="block w-fit text-2xs sm:text-xs font-semibold uppercase
+                                   tracking-widest text-primary-200 mb-4 px-3 py-1
+                                   rounded-full border border-white/25 bg-white/10 backdrop-blur-sm"
+                      >
+                        EngineX Mart
+                      </motion.span>
                       <motion.h1
                         initial={{ opacity: 0, y: 24 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
-                        className="font-display text-3xl sm:text-4xl md:text-5xl
-                                   font-bold mb-4 leading-tight max-w-xl"
+                        className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl
+                                   font-bold mb-5 leading-tight max-w-2xl"
                       >
                         {banner.title}
                       </motion.h1>
@@ -83,8 +93,8 @@ export default function HeroBanner() {
                             href={banner.link}
                             className="inline-flex items-center gap-2 bg-primary-600
                                        hover:bg-primary-700 text-white font-medium
-                                       px-6 py-2.5 rounded-xl transition-colors text-sm
-                                       hover:scale-105 active:scale-95 transition-transform"
+                                       px-7 py-3 sm:px-8 sm:py-3.5 rounded-xl transition-colors text-sm sm:text-base
+                                       hover:scale-105 active:scale-95 transition-transform shadow-lg shadow-primary-900/30"
                           >
                             Shop Now
                           </Link>
@@ -95,25 +105,35 @@ export default function HeroBanner() {
                 </>
               ) : (
                 <div className={cn(
-                  "w-full h-full bg-gradient-to-br flex items-center justify-center",
+                  "relative w-full h-full bg-gradient-to-br flex items-center justify-center overflow-hidden",
                   GRADIENT_BG[i % GRADIENT_BG.length]
                 )}>
-                  <div className="text-center text-white px-8 max-w-2xl">
-                    <motion.p
+                  {/* Subtle decorative grid pattern for depth */}
+                  <div
+                    className="absolute inset-0 opacity-[0.07]"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)",
+                      backgroundSize: "42px 42px",
+                    }}
+                  />
+                  <div className="relative text-center text-white px-6 max-w-3xl">
+                    <motion.span
                       initial={{ opacity: 0, y: 16 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
-                      className="text-xs font-medium uppercase tracking-widest
-                                 text-primary-200 mb-4"
+                      className="inline-block text-2xs sm:text-xs font-semibold uppercase
+                                 tracking-widest text-primary-200 mb-5 px-3 py-1
+                                 rounded-full border border-white/25 bg-white/10 backdrop-blur-sm"
                     >
-                      BuildMart BD
-                    </motion.p>
+                      EngineX Mart
+                    </motion.span>
                     <motion.h1
                       initial={{ opacity: 0, y: 24 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-                      className="font-display text-3xl sm:text-4xl md:text-5xl
-                                 font-bold mb-4 leading-tight"
+                      className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl
+                                 font-bold mb-5 leading-tight"
                     >
                       {banner.title}
                     </motion.h1>
@@ -121,7 +141,7 @@ export default function HeroBanner() {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.32, ease: "easeOut" }}
-                      className="text-primary-100 text-sm sm:text-base mb-8 max-w-md mx-auto"
+                      className="text-primary-100 text-sm sm:text-base md:text-lg mb-9 max-w-xl mx-auto"
                     >
                       Bangladesh-এর সেরা Construction Materials ও Engineering Services
                     </motion.p>
@@ -134,9 +154,9 @@ export default function HeroBanner() {
                         <Link
                           href={banner.link}
                           className="inline-flex items-center gap-2 bg-white text-primary-800
-                                     font-semibold px-7 py-3 rounded-xl hover:bg-primary-50
-                                     transition-colors text-sm hover:scale-105 active:scale-95
-                                     transition-transform"
+                                     font-semibold px-7 py-3 sm:px-8 sm:py-3.5 rounded-xl hover:bg-primary-50
+                                     transition-colors text-sm sm:text-base hover:scale-105 active:scale-95
+                                     transition-transform shadow-lg shadow-black/20"
                         >
                           Explore Now <ChevronRight size={16} />
                         </Link>
@@ -158,29 +178,29 @@ export default function HeroBanner() {
             aria-label="Previous banner"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-20
-                       w-10 h-10 rounded-full bg-white/20 hover:bg-white/40
+            className="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 z-20
+                       w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/20 hover:bg-white/40
                        backdrop-blur-sm text-white flex items-center justify-center"
           >
-            <ChevronLeft size={20} />
+            <ChevronLeft size={22} />
           </motion.button>
           <motion.button
             onClick={next}
             aria-label="Next banner"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-20
-                       w-10 h-10 rounded-full bg-white/20 hover:bg-white/40
+            className="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 z-20
+                       w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/20 hover:bg-white/40
                        backdrop-blur-sm text-white flex items-center justify-center"
           >
-            <ChevronRight size={20} />
+            <ChevronRight size={22} />
           </motion.button>
         </>
       )}
 
       {/* Dots */}
       {banners.length > 1 && (
-        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20
+        <div className="absolute bottom-6 sm:bottom-7 left-1/2 -translate-x-1/2 z-20
                         flex items-center gap-2">
           {banners.map((_: any, i: number) => (
             <motion.button
