@@ -1,0 +1,61 @@
+{
+  "name": "EngineX Mart — Construction Materials & Engineering Services",
+  "short_name": "EngineX Mart",
+  "description": "Bangladesh-এর সেরা Construction Materials ও Engineering Services Marketplace। Cement, Steel, Paint, Electrical, Sanitary সহ সব ধরনের নির্মাণ সামগ্রী।",
+  "start_url": "/?source=pwa",
+  "id": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#ffffff",
+  "theme_color": "#1e3a8a",
+  "lang": "bn-BD",
+  "dir": "ltr",
+  "categories": ["shopping", "business"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Cart",
+      "short_name": "Cart",
+      "url": "/cart",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "My Orders",
+      "short_name": "Orders",
+      "url": "/dashboard/orders",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Get a Quotation",
+      "short_name": "Quote",
+      "url": "/quotation/new",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

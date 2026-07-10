@@ -53,10 +53,10 @@ export default function Footer() {
           <div className="lg:col-span-2 space-y-5">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3">
-              <img src="/images/logo.png" alt="Build EngineX" className="w-10 h-10 object-contain" />
+              <img src="/images/logo.png" alt="EngineX Mart" className="w-10 h-10 object-contain" />
               <div>
                 <p className="font-display font-bold text-white text-xl leading-tight">
-                  Build EngineX
+                  EngineX Mart
                 </p>
                 <p className="text-dark-400 text-xs">
                   Construction Marketplace
@@ -226,7 +226,7 @@ export default function Footer() {
         <div className="container-main py-5">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
             <p className="text-xs text-dark-500 text-center sm:text-left">
-              &copy; {year} Build EngineX. All rights reserved.
+              &copy; {year} EngineX Mart. All rights reserved.
             </p>
             <div className="flex items-center gap-4">
               {[

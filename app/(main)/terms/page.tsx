@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title:       "Terms & Conditions | Build EngineX",
-  description: "Read Build EngineX's terms and conditions governing the use of our marketplace platform.",
+  title:       "Terms & Conditions | EngineX Mart",
+  description: "Read EngineX Mart's terms and conditions governing the use of our marketplace platform.",
 };
 
 const LAST_UPDATED = "June 1, 2025";
@@ -24,7 +24,7 @@ export default function TermsPage() {
 
           <Section title="1. Acceptance of Terms">
             <p>
-              By accessing and using the Build EngineX website and services, you accept
+              By accessing and using the EngineX Mart website and services, you accept
               and agree to be bound by these Terms and Conditions. If you do not agree
               to these terms, please do not use our platform.
             </p>
@@ -89,7 +89,7 @@ export default function TermsPage() {
               <li>Service bookings are confirmed only after reviewing your project requirements</li>
               <li>Service timelines are estimates and may vary based on project complexity</li>
               <li>All engineering services are provided by qualified and licensed professionals</li>
-              <li>Build EngineX acts as a marketplace; individual service providers are responsible for their work quality</li>
+              <li>EngineX Mart acts as a marketplace; individual service providers are responsible for their work quality</li>
               <li>Cancellation of booked services must be made at least 48 hours in advance for a full refund</li>
             </ul>
           </Section>
@@ -117,8 +117,8 @@ export default function TermsPage() {
 
           <Section title="10. Intellectual Property">
             <p>
-              All content on Build EngineX — including logos, images, text, and software — is
-              the property of Build EngineX and protected by applicable intellectual property laws.
+              All content on EngineX Mart — including logos, images, text, and software — is
+              the property of EngineX Mart and protected by applicable intellectual property laws.
               You may not reproduce, distribute, or create derivative works without our express
               written permission.
             </p>
@@ -126,7 +126,7 @@ export default function TermsPage() {
 
           <Section title="11. Disclaimer of Warranties">
             <p>
-              Build EngineX provides its services &quot;as is&quot; without warranties of any kind.
+              EngineX Mart provides its services &quot;as is&quot; without warranties of any kind.
               We do not warrant that our website will be error-free or uninterrupted.
               Engineering calculator results are approximations and should not be used as
               the sole basis for structural or safety decisions without professional review.
@@ -135,7 +135,7 @@ export default function TermsPage() {
 
           <Section title="12. Limitation of Liability">
             <p>
-              To the maximum extent permitted by law, Build EngineX shall not be liable for
+              To the maximum extent permitted by law, EngineX Mart shall not be liable for
               any indirect, incidental, special, or consequential damages arising from your
               use of our platform. Our total liability shall not exceed the amount paid for
               the specific product or service giving rise to the claim.
@@ -154,7 +154,7 @@ export default function TermsPage() {
             <p>For questions about these Terms, please contact us:</p>
             <div className="card p-5 bg-dark-50 mt-4">
               <div className="space-y-2 text-sm text-dark-600">
-                <p><strong>Build EngineX</strong></p>
+                <p><strong>EngineX Mart</strong></p>
                 <p>Email: legal@buildenginex.vercel.app</p>
                 <p>Phone: {process.env.NEXT_PUBLIC_CALL_NUMBER || "+880 1XXX-XXXXXX"}</p>
                 <p>Address: Dhaka, Bangladesh</p>

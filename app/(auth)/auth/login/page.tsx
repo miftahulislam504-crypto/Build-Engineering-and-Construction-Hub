@@ -79,7 +79,7 @@ export default function LoginPage() {
             Welcome Back
           </h1>
           <p className="text-dark-400 text-sm">
-            Login to your Build EngineX account
+            Login to your EngineX Mart account
           </p>
         </div>
 

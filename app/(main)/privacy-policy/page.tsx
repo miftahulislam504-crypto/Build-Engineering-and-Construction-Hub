@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title:       "Privacy Policy | Build EngineX",
-  description: "Read Build EngineX's privacy policy to understand how we collect, use, and protect your personal information.",
+  title:       "Privacy Policy | EngineX Mart",
+  description: "Read EngineX Mart's privacy policy to understand how we collect, use, and protect your personal information.",
 };
 
 const LAST_UPDATED = "June 1, 2025";
@@ -24,7 +24,7 @@ export default function PrivacyPolicyPage() {
 
           <Section title="1. Introduction">
             <p>
-              Welcome to Build EngineX (&quot;we&quot;, &quot;our&quot;, &quot;us&quot;). We are committed to protecting
+              Welcome to EngineX Mart (&quot;we&quot;, &quot;our&quot;, &quot;us&quot;). We are committed to protecting
               your personal information and your right to privacy. This Privacy Policy explains
               how we collect, use, disclose, and safeguard your information when you visit our
               website and use our services.
@@ -168,7 +168,7 @@ export default function PrivacyPolicyPage() {
             </p>
             <div className="card p-5 bg-dark-50 not-prose mt-4">
               <div className="space-y-2 text-sm text-dark-600">
-                <p><strong>Build EngineX</strong></p>
+                <p><strong>EngineX Mart</strong></p>
                 <p>Email: privacy@buildenginex.vercel.app</p>
                 <p>Phone: {process.env.NEXT_PUBLIC_CALL_NUMBER || "+880 1XXX-XXXXXX"}</p>
                 <p>Address: Dhaka, Bangladesh</p>

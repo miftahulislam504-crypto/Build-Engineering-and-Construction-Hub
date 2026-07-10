@@ -20,12 +20,12 @@ export async function generateMetadata({
 
   if (!product) {
     return {
-      title: "Product Not Found | Build EngineX",
+      title: "Product Not Found | EngineX Mart",
     };
   }
 
   return {
-    title:       `${product.name} | Build EngineX`,
+    title:       `${product.name} | EngineX Mart`,
     description: product.shortDescription || product.description?.slice(0, 160),
     keywords: [
       product.name,
@@ -35,7 +35,7 @@ export async function generateMetadata({
       "building materials price BD",
     ].filter(Boolean),
     openGraph: {
-      title:       `${product.name} — ${product.brand?.name || "Build EngineX"}`,
+      title:       `${product.name} — ${product.brand?.name || "EngineX Mart"}`,
       description: product.shortDescription || "",
       images:      product.primaryImage ? [{ url: product.primaryImage }] : [],
       url:         `${APP_URL}/products/${product.slug}`,
@@ -67,11 +67,11 @@ export async function generateMetadata({
   const service = await getServiceBySlug(params.slug);
 
   if (!service) {
-    return { title: "Service Not Found | Build EngineX" };
+    return { title: "Service Not Found | EngineX Mart" };
   }
 
   return {
-    title:       `${service.name} | Build EngineX`,
+    title:       `${service.name} | EngineX Mart`,
     description: service.shortDescription || service.description?.slice(0, 160),
     keywords: [
       service.name,
@@ -80,7 +80,7 @@ export async function generateMetadata({
       service.serviceCategory,
     ],
     openGraph: {
-      title:       `${service.name} | Build EngineX`,
+      title:       `${service.name} | EngineX Mart`,
       description: service.shortDescription || "",
       images:      service.images?.[0] ? [{ url: service.images[0] }] : [],
     },
@@ -105,10 +105,10 @@ export async function generateMetadata({
   );
   const post = posts[0];
 
-  if (!post) return { title: "Post Not Found | Build EngineX" };
+  if (!post) return { title: "Post Not Found | EngineX Mart" };
 
   return {
-    title:       `${post.title} | Build EngineX`,
+    title:       `${post.title} | EngineX Mart`,
     description: post.excerpt || post.content?.slice(0, 160),
     openGraph: {
       title:       post.title,

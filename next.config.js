@@ -29,6 +29,29 @@ const nextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
+
+  // PWA: make sure the service worker file itself is always
+  // revalidated. Without this, browsers can cache sw.js for hours,
+  // which delays customers getting bug fixes / new deploys since the
+  // old worker keeps intercepting requests until its cached copy expires.
+  async headers() {
+    return [
+      {
+        source: "/sw.js",
+        headers: [
+          { key: "Cache-Control", value: "no-cache, no-store, must-revalidate" },
+          { key: "Service-Worker-Allowed", value: "/" },
+        ],
+      },
+      {
+        source: "/manifest.json",
+        headers: [
+          { key: "Content-Type", value: "application/manifest+json" },
+          { key: "Cache-Control", value: "public, max-age=86400" },
+        ],
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

@@ -6,8 +6,8 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title:       "About Us | Build EngineX",
-  description: "Learn about Build EngineX — Bangladesh's leading civil engineering construction materials and services marketplace.",
+  title:       "About Us | EngineX Mart",
+  description: "Learn about EngineX Mart — Bangladesh's leading civil engineering construction materials and services marketplace.",
 };
 
 const STATS = [
@@ -51,13 +51,13 @@ export default function AboutPage() {
       <div className="bg-gradient-to-br from-primary-900 to-primary-700 text-white py-20">
         <div className="container-main text-center">
           <p className="text-primary-200 text-sm font-medium uppercase tracking-widest mb-4">
-            About Build EngineX
+            About EngineX Mart
           </p>
           <h1 className="font-display text-4xl sm:text-5xl font-bold mb-5 max-w-3xl mx-auto">
             Bangladesh&apos;s Trusted Construction Marketplace
           </h1>
           <p className="text-primary-100 text-base max-w-2xl mx-auto leading-relaxed">
-            Build EngineX is a one-stop marketplace connecting construction professionals,
+            EngineX Mart is a one-stop marketplace connecting construction professionals,
             contractors, and homeowners with quality building materials and engineering
             services across Bangladesh.
           </p>
@@ -95,7 +95,7 @@ export default function AboutPage() {
               </h2>
               <p className="text-dark-500 text-sm leading-relaxed mb-5">
                 We believe every construction project deserves access to quality materials
-                at fair prices. Build EngineX was founded to eliminate the complexity of
+                at fair prices. EngineX Mart was founded to eliminate the complexity of
                 sourcing construction materials in Bangladesh — bringing together top
                 brands, reliable contractors, and professional engineers in one platform.
               </p>

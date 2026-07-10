@@ -11,8 +11,8 @@ export default function AuthLayout({
       {/* Header */}
       <div className="p-6">
         <Link href="/" className="inline-flex items-center gap-2">
-          <img src="/images/logo.png" alt="Build EngineX" className="w-9 h-9 object-contain" />
-          <span className="font-display font-bold text-white text-xl">Build EngineX</span>
+          <img src="/images/logo.png" alt="EngineX Mart" className="w-9 h-9 object-contain" />
+          <span className="font-display font-bold text-white text-xl">EngineX Mart</span>
         </Link>
       </div>
 
@@ -24,7 +24,7 @@ export default function AuthLayout({
       {/* Footer */}
       <div className="p-6 text-center">
         <p className="text-primary-300 text-xs">
-          &copy; {new Date().getFullYear()} Build EngineX. All rights reserved.
+          &copy; {new Date().getFullYear()} EngineX Mart. All rights reserved.
         </p>
       </div>
     </div>

@@ -111,7 +111,7 @@ export default function RegisterPage() {
             Create Account
           </h1>
           <p className="text-dark-400 text-sm">
-            Join Build EngineX today
+            Join EngineX Mart today
           </p>
         </div>
 

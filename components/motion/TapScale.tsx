@@ -3,7 +3,7 @@
 /**
  * TapScale — drop-in replacement for a <div> or <button> wrapper that adds
  * a satisfying press-down effect on tap/click. Built for mobile shoppers
- * (most of BuildMart's traffic is phone-based) where tactile feedback on
+ * (most of EngineX Mart's traffic is phone-based) where tactile feedback on
  * buttons like "Add to Cart" makes the UI feel responsive instead of flat.
  *
  * Does NOT change layout, hover, or existing className — just adds motion.
