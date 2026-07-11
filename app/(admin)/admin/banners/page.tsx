@@ -73,8 +73,19 @@ export default function AdminBannersPage() {
       setBanners((b) => [...b, { id: docRef.id, ...newBanner, imageUrl }]);
       toast.success("Banner added!");
       resetForm();
-    } catch {
-      toast.error("Failed to add banner");
+    } catch (err: any) {
+      // eslint-disable-next-line no-console
+      console.error("[AdminBanners] Failed to save banner:", err);
+      const code = err?.code || "";
+      let message = "Failed to add banner";
+      if (code.includes("storage/unauthorized") || code.includes("permission-denied")) {
+        message = "Permission denied — check Firebase Storage/Firestore security rules";
+      } else if (code.includes("storage/unknown") || code.includes("storage/retry-limit-exceeded")) {
+        message = "Upload failed — check Firebase Storage bucket configuration";
+      } else if (err?.message) {
+        message = `Failed to add banner: ${err.message}`;
+      }
+      toast.error(message);
     } finally {
       setSaving(false);
     }
